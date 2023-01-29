@@ -674,7 +674,8 @@ static BaseType_t prvBackoffForRetry( BackoffAlgorithmContext_t * pxRetryParams 
         xReturnStatus = pdPASS;
 
         ESP_LOGI( TAG,
-                  "Retry attempt %lu.",
+                //   "Retry attempt %lu.",
+                  "Retry attempt %u.",
                   pxRetryParams->attemptsDone );
     }
 

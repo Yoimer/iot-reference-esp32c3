@@ -499,7 +499,7 @@ static void prvPublishToTopic( MQTTQoS_t xQoS,
                              portMAX_DELAY );
 
         ESP_LOGI( TAG,
-                  "Task \"%s\" sending publish request to coreMQTT-Agent with message \"%s\" on topic \"%s\" with ID %ld.",
+                  "Task \"%s\" sending publish request to coreMQTT-Agent with message \"%s\" on topic \"%s\" with ID %u.",
                   pcTaskGetName( xCommandContext.xTaskToNotify ),
                   pcPayload,
                   pcTopicName,
@@ -540,13 +540,13 @@ static void prvPublishToTopic( MQTTQoS_t xQoS,
             ( ulNotifiedValue != ulPublishMessageId ) )
         {
             ESP_LOGW( TAG,
-                      "Error or timed out waiting for ack for publish message %ld. Re-attempting publish.",
+                      "Error or timed out waiting for ack for publish message %u. Re-attempting publish.",
                       ulPublishMessageId );
         }
         else
         {
             ESP_LOGI( TAG,
-                      "Publish %ld succeeded for task \"%s\".",
+                      "Publish %u succeeded for task \"%s\".",
                       ulPublishMessageId,
                       pcTaskGetName( xCommandContext.xTaskToNotify ) );
         }
@@ -618,7 +618,7 @@ static void prvSubscribeToTopic( IncomingPublishCallbackContext_t * pxIncomingPu
                              portMAX_DELAY );
 
         ESP_LOGI( TAG,
-                  "Task \"%s\" sending subscribe request to coreMQTT-Agent for topic filter: %s with id %ld",
+                  "Task \"%s\" sending subscribe request to coreMQTT-Agent for topic filter: %s with id %u",
                   pcTaskGetName( xCommandContext.xTaskToNotify ),
                   pcTopicFilter,
                   ulSubscribeMessageId );
@@ -649,13 +649,13 @@ static void prvSubscribeToTopic( IncomingPublishCallbackContext_t * pxIncomingPu
             ( ulNotifiedValue != ulSubscribeMessageId ) )
         {
             ESP_LOGW( TAG,
-                      "Error or timed out waiting for ack to subscribe message %ld. Re-attempting subscribe.",
+                      "Error or timed out waiting for ack to subscribe message %u. Re-attempting subscribe.",
                       ulSubscribeMessageId );
         }
         else
         {
             ESP_LOGI( TAG,
-                      "Subscribe %ld for topic filter %s succeeded for task \"%s\".",
+                      "Subscribe %u for topic filter %s succeeded for task \"%s\".",
                       ulSubscribeMessageId,
                       pcTopicFilter,
                       pcTaskGetName( xCommandContext.xTaskToNotify ) );
@@ -725,7 +725,7 @@ static void prvUnsubscribeToTopic( MQTTQoS_t xQoS,
                              pdTRUE,
                              portMAX_DELAY );
         ESP_LOGI( TAG,
-                  "Task \"%s\" sending unsubscribe request to coreMQTT-Agent for topic filter: %s with id %ld",
+                  "Task \"%s\" sending unsubscribe request to coreMQTT-Agent for topic filter: %s with id %u",
                   pcTaskGetName( xCommandContext.xTaskToNotify ),
                   pcTopicFilter,
                   ulUnsubscribeMessageId );
@@ -756,13 +756,13 @@ static void prvUnsubscribeToTopic( MQTTQoS_t xQoS,
             ( ulNotifiedValue != ulUnsubscribeMessageId ) )
         {
             ESP_LOGW( TAG,
-                      "Error or timed out waiting for ack to unsubscribe message %ld. Re-attempting subscribe.",
+                      "Error or timed out waiting for ack to unsubscribe message %u. Re-attempting subscribe.",
                       ulUnsubscribeMessageId );
         }
         else
         {
             ESP_LOGI( TAG,
-                      "Unsubscribe %ld for topic filter %s succeeded for task \"%s\".",
+                      "Unsubscribe %u for topic filter %s succeeded for task \"%s\".",
                       ulUnsubscribeMessageId,
                       pcTopicFilter,
                       pcTaskGetName( xCommandContext.xTaskToNotify ) );
