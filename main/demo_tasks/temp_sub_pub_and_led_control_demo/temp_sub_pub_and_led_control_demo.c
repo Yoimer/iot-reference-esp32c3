@@ -86,6 +86,9 @@
 /* Demo task configurations include. */
 #include "temp_sub_pub_and_led_control_demo_config.h"
 
+/* Lora functions include*/
+#include "lora.h"
+
 /* Preprocessor definitions ***************************************************/
 
 /* coreMQTT-Agent event group bit definitions */
@@ -666,4 +669,18 @@ void vStartTempSubPubAndLEDControlDemo( void )
                  NULL,
                  temppubsubandledcontrolconfigTASK_PRIORITY,
                  NULL );
+}
+
+// LORA as sender
+void task_tx(void * pvParameters) {
+    ESP_LOGI(pcTaskGetName(NULL), "Start");
+    uint8_t buf[256]; // Maximum Payload size of SX1276/77/78/79 is 255
+    while (1) {
+        TickType_t nowTick = xTaskGetTickCount();
+        int send_len = sprintf((char * ) buf, "Master Gateway %"
+            PRIu32, nowTick);
+        lora_send_packet(buf, send_len);
+        ESP_LOGI(pcTaskGetName(NULL), "%d byte packet sent...", send_len);
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    } // end while
 }
